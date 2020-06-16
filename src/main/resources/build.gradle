@@ -1,0 +1,19 @@
+plugins {
+    id 'application'
+}
+
+mainClassName = '@mainClassName'
+
+run {
+    classpath += files('classes')
+}
+
+repositories {
+//repositories
+}
+
+dependencies {
+    runtimeOnly fileTree(dir: 'local-lib', include: ['*'])
+
+//dependencies
+}

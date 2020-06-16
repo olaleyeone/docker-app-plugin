@@ -1,0 +1,38 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'com.gradle.plugin-publish' version '0.12.0'
+    id 'maven'
+}
+
+group 'com.github.olaleyeone'
+version '0.0.1'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+pluginBundle {
+    website = 'https://github.com/olaleyeone/docker-app-plugin'
+    vcsUrl = 'https://github.com/olaleyeone/docker-app-plugin'
+    tags = ['docker', 'standalone', 'application']
+}
+
+gradlePlugin {
+    plugins {
+        dockerAppPlugin {
+            id = 'com.github.olaleyeone.docker-app'
+            displayName = 'docker-app'
+            implementationClass = 'com.github.olaleyeone.dockerapp.DockerApp'
+            description = 'Create docker ready artifacts for your java application'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile gradleApi()
+}
