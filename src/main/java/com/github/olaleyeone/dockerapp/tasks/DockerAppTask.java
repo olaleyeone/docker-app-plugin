@@ -80,10 +80,15 @@ public class DockerAppTask extends DefaultTask {
 
             String copyCommands = sourceFolders.stream()
                     .map(path -> {
-                        String relativePath = appRoot.relativize(path).toString();
-                        String copySource = String.format("%s/*.jar", relativePath);
+                        Path relativePath =  appRoot.relativize(path);
+                        StringBuilder stringBuilder = new StringBuilder();
+                        for(int i=0; i<relativePath.getNameCount(); i++){
+                            stringBuilder.append(relativePath.getName(i)).append('/');
+                        }
+                        String relativePathString = stringBuilder.substring(0, stringBuilder.length()-1);
+                        String copySource = String.format("%s/*.jar", relativePathString);
                         if (Files.exists(path.resolve("lib"))) {
-                            copySource = String.format("%s/*.jar %s/lib/*.jar", relativePath, relativePath);
+                            copySource = String.format("%s/*.jar %s/lib/*.jar", relativePathString, relativePathString);
                         }
 //                        Optional.ofNullable(projectDescriptor.getDependentGroups(path.toFile().getName()))
 //                                .map(Set::size).orElse(0),
