@@ -140,7 +140,7 @@ public class DockerAppTask extends DefaultTask {
         return sourceFolders;
     }
 
-    public Path createAppDirectory(Project project) {
+    protected Path createAppDirectory(Project project) {
         Path application = project.getBuildDir().toPath().resolve(DockerApp.workDir);
         try {
             if (Files.exists(application)) {

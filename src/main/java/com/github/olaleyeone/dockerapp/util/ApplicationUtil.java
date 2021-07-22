@@ -46,7 +46,9 @@ public class ApplicationUtil {
                     if (!sourceSet.getName().equals(MAIN_SOURCE_SET_NAME)) {
                         return;
                     }
-                    fileUtils.copyDirectoryContent(sourceSet.getOutput().getResourcesDir().toPath(), classesDir);
+                    if (sourceSet.getOutput().getResourcesDir().exists()) {
+                        fileUtils.copyDirectoryContent(sourceSet.getOutput().getResourcesDir().toPath(), classesDir);
+                    }
                     sourceSet.getOutput().getClassesDirs().getFiles()
                             .forEach(file -> fileUtils.copyDirectoryContent(file.toPath(), classesDir));
                 });
